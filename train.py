@@ -1,4 +1,5 @@
 import torch
+from torch.utils.data import DataLoader
 from transformers import AutoTokenizer, DataCollatorWithPadding, AdamW, AutoModelForSequenceClassification, get_scheduler
 from datasets import load_dataset, load_metric
 from tqdm.auto import tqdm
@@ -21,8 +22,6 @@ tokenized_datasets = tokenized_datasets.remove_columns(
 )
 tokenized_datasets = tokenized_datasets.rename_column("label", "labels")
 tokenized_datasets.set_format("torch")
-
-from torch.utils.data import DataLoader
 
 train_dataloader = DataLoader(
     tokenized_datasets["train"], shuffle=True, batch_size=8, collate_fn=data_collator
