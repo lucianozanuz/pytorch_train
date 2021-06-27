@@ -4,7 +4,7 @@ from datasets import load_dataset, load_metric
 from tqdm.auto import tqdm
 from time import gmtime, strftime
 
-print("Start: ", strftime("%H:%M:%S", gmtime()))
+print("Start:", strftime("%H:%M:%S", gmtime()))
 
 raw_datasets = load_dataset("glue", "mrpc")
 checkpoint = "bert-base-uncased"
@@ -79,4 +79,4 @@ for batch in eval_dataloader:
 
 metric.compute()
 
-print("End: ", strftime("%H:%M:%S", gmtime()))
+print("End  :", strftime("%H:%M:%S", gmtime()))
