@@ -1,11 +1,11 @@
 import torch
-import sys
+#import sys
 from transformers import AutoTokenizer, DataCollatorWithPadding, AdamW, AutoModelForSequenceClassification, get_scheduler
 from datasets import load_dataset, load_metric
 from tqdm.auto import tqdm
 
-sys.stdout = open('output.txt', 'w')
-print('test')
+#sys.stdout = open('output.txt', 'w')
+#print('test')
 
 raw_datasets = load_dataset("glue", "mrpc")
 checkpoint = "bert-base-uncased"
@@ -80,4 +80,4 @@ for batch in eval_dataloader:
 
 metric.compute()
 
-sys.stdout.close()
+#sys.stdout.close()
