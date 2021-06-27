@@ -1,5 +1,11 @@
-from datasets import load_dataset
-from transformers import AutoTokenizer, DataCollatorWithPadding
+import torch
+import sys
+from transformers import AutoTokenizer, DataCollatorWithPadding, AdamW, AutoModelForSequenceClassification, get_scheduler
+from datasets import load_dataset, load_metric
+from tqdm.auto import tqdm
+
+sys.stdout = open('output.txt', 'w')
+print('test')
 
 raw_datasets = load_dataset("glue", "mrpc")
 checkpoint = "bert-base-uncased"
@@ -31,13 +37,6 @@ for batch in train_dataloader:
     break
 {k: v.shape for k, v in batch.items()}
 
-
-import torch
-
-from tqdm.auto import tqdm
-
-from transformers import AdamW, AutoModelForSequenceClassification, get_scheduler
-
 model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=2)
 optimizer = AdamW(model.parameters(), lr=3e-5)
 
@@ -68,8 +67,6 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         progress_bar.update(1)
 
-from datasets import load_metric
-
 metric= load_metric("glue", "mrpc")
 model.eval()
 for batch in eval_dataloader:
@@ -82,3 +79,5 @@ for batch in eval_dataloader:
     metric.add_batch(predictions=predictions, references=batch["labels"])
 
 metric.compute()
+
+sys.stdout.close()
