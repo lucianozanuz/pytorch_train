@@ -66,7 +66,7 @@ for epoch in range(num_epochs):
 metric= load_metric("glue", "mrpc")
 model.eval()
 for batch in eval_dataloader:
-    batch = {k: v.to(device) for k, v in batch.items()}
+    outputs = model(**batch)
     with torch.no_grad():
         outputs = model(**batch)
     
