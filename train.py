@@ -21,7 +21,6 @@ tokenized_datasets = tokenized_datasets.remove_columns(
 )
 tokenized_datasets = tokenized_datasets.rename_column("label", "labels")
 tokenized_datasets.set_format("torch")
-tokenized_datasets["train"].column_names
 
 from torch.utils.data import DataLoader
 
@@ -31,10 +30,6 @@ train_dataloader = DataLoader(
 eval_dataloader = DataLoader(
     tokenized_datasets["validation"], batch_size=8, collate_fn=data_collator
 )
-
-for batch in train_dataloader:
-    break
-{k: v.shape for k, v in batch.items()}
 
 model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=2)
 optimizer = AdamW(model.parameters(), lr=3e-5)
