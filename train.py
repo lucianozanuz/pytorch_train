@@ -1,10 +1,9 @@
 import torch
-#import sys
 from transformers import AutoTokenizer, DataCollatorWithPadding, AdamW, AutoModelForSequenceClassification, get_scheduler
 from datasets import load_dataset, load_metric
 from tqdm.auto import tqdm
+from time import gmtime, strftime
 
-#sys.stdout = open('output.txt', 'w')
 print("Start: ", strftime("%H:%M:%S", gmtime()))
 
 raw_datasets = load_dataset("glue", "mrpc")
@@ -81,4 +80,3 @@ for batch in eval_dataloader:
 metric.compute()
 
 print("End: ", strftime("%H:%M:%S", gmtime()))
-#sys.stdout.close()
