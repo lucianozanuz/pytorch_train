@@ -4,8 +4,8 @@ from transformers import AutoTokenizer, DataCollatorWithPadding, AdamW, AutoMode
 from datasets import load_dataset, load_metric
 from tqdm.auto import tqdm
 from time import gmtime, strftime
-
 import logging
+
 logging.basicConfig(filename="log.txt",level=logging.DEBUG)
 logging.captureWarnings(True)
 
@@ -13,7 +13,6 @@ txt_start  = "Start: " + strftime("%H:%M:%S", gmtime())
 logging.info(txt_start)
 print(txt_start)
 # print("Start:", strftime("%H:%M:%S", gmtime()))
-
 
 raw_datasets = load_dataset("glue", "mrpc")
 checkpoint = "bert-base-uncased"
